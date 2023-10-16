@@ -7,3 +7,5 @@ folium
 datetime
 matplotlib
 seaborn
+request
+io
