@@ -40,7 +40,7 @@ def get_data_blue():
     url = 'https://raw.githubusercontent.com/Dan399/streamlit_tracker_map/Data/DataBluemessaging2023-2023.xlsx'
     data = rq.get(url).content
     #df = pd.read_excel(BytesIO(data))
-    df_blue = pd.read_excel(BytesIO(data), converters={'nrp':str, 'user':str, 'foto_domicilio.lat':float, 'foto_domicilio.lng':float})
+    df_blue = pd.read_excel(BytesIO(data), converters={'nrp':str, 'user':str, 'foto_domicilio.lat':float, 'foto_domicilio.lng':float}, engine='openpyxl')
     df_blue['fecha_accion_fiscal'] = pd.to_datetime(df_blue['fecha_accion_fiscal']).dt.date
     #print(df_blue['fecha_accion_fiscal'].head())
     return df_blue
