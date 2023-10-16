@@ -2,3 +2,8 @@ openpyxl
 plotly
 pandas
 streamlit
+streamlit-folium
+folium
+datetime
+matplotlib
+seaborn
