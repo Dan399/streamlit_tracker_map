@@ -34,7 +34,7 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 # READ EXCEL DATA FROM BLUEMESSAGING
 @st.cache_data
 def get_data_blue():
-    url = 'https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv'
+    url = 'https://github.com/Dan399/streamlit_tracker_map/blob/0e1ae739e4a80bb64384a11752108f1a6657558b/Data/DataBluemessaging2023-2023.xlsx'
     df = pd.read_csv(url, index_col=0)
     df_blue = pd.read_excel(url, 
     converters={'nrp':str, 'user':str, 'foto_domicilio.lat':float, 'foto_domicilio.lng':float})
