@@ -34,9 +34,11 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 # READ EXCEL DATA FROM BLUEMESSAGING
 @st.cache_data
 def get_data_blue():
+  
     url = 'https://raw.githubusercontent.com/Dan399/streamlit_tracker_map/Data/DataBluemessaging2023-2023.xlsx'
-    df_blue = pd.read_excel(url, 
-    converters={'nrp':str, 'user':str, 'foto_domicilio.lat':float, 'foto_domicilio.lng':float})
+    data = rq.get(url).content
+    #df = pd.read_excel(BytesIO(data))
+    df_blue = pd.read_excel(BytesIO(data), converters={'nrp':str, 'user':str, 'foto_domicilio.lat':float, 'foto_domicilio.lng':float})
     df_blue['fecha_accion_fiscal'] = pd.to_datetime(df_blue['fecha_accion_fiscal']).dt.date
     #print(df_blue['fecha_accion_fiscal'].head())
     return df_blue
@@ -47,7 +49,8 @@ df_bluemessaging = get_data_blue()  # Call function to read BIMESTRES_AÑOS
 @st.cache_data
 def get_data_notif():
     url2 = 'https://raw.githubusercontent.com/Dan399/streamlit_tracker_map/Data/notif_data.xlsx'
-    df_notif = pd.read_excel(url2, 
+    data2 = rq.get(url2).content
+    df_notif = pd.read_excel(BytesIO(data2), 
     converters={'usuario_Blue_Naa':str})
     return df_notif
 
