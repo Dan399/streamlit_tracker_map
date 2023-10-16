@@ -12,6 +12,8 @@ import base64
 import os
 import streamlit.components.v1 as components
 from datetime import date
+import requests as rq
+from io import BytesIO
 
 d_index = 1
 
