@@ -53,7 +53,7 @@ def get_data_notif():
     url2 = 'https://raw.githubusercontent.com/Dan399/streamlit_tracker_map/Data/notif_data.xlsx'
     data2 = rq.get(url2).content
     df_notif = pd.read_excel(BytesIO(data2), 
-    converters={'usuario_Blue_Naa':str})
+    converters={'usuario_Blue_Naa':str}, engine='openpyxl')
     return df_notif
 
 df_notificadores = get_data_notif()  # Call function to read database notificadores
