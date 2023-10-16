@@ -47,7 +47,8 @@ df_bluemessaging = get_data_blue()  # Call function to read BIMESTRES_AÑOS
 # READ EXCEL DATA FROM NOTIFICADORES LIST
 @st.cache_data
 def get_data_notif():
-    df_notif = pd.read_excel(r"C:\\Users\\IN334906\\Lenovo Old\\2022\\45_PYTHON PROJECTS\\DanDataSolutions\\DDS-MapNotificadores\\Data\\notif_data.xlsx", 
+    url2 = 'https://github.com/Dan399/streamlit_tracker_map/blob/baef5638a7bbb4c2e87d37fefd3bee372384543f/Data/notif_data.xlsx'
+    df_notif = pd.read_excel(url2, 
     converters={'usuario_Blue_Naa':str})
     return df_notif
 
