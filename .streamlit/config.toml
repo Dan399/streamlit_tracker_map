@@ -6,10 +6,10 @@ primaryColor = '#27374D'
 backgroundColor = '#FFFFFF'
 
 # Background color for sidebar and most interactive widgets
-secondaryBackgroundColor = '#9DB2BF'
+secondaryBackgroundColor = '#DDE6ED'
 
 # Color used for almost all text
-textColor = '#202020'
+textColor = '#27374D'
 
 # Font family for all text in the app, except code blocks
 # Accepted values (serif | sans serif | monospace) 
