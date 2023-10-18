@@ -193,7 +193,7 @@ if notif:
         left_column, right_column = st.columns([3,2])
         #left_column.st_folium(CircuitsMap) width=1000, height=600
         with left_column:
-            st_Data = st_folium(CircuitsMap, width=1000, height=600)
+            st_Data = st_folium(CircuitsMap, width=700, height=500)
 
         right_column.plotly_chart(fig_notif_diaria, use_container_width=True)
 
