@@ -19,7 +19,7 @@ d_index = 1
 
   
 # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
-st.set_page_config(page_title="Tracking de Diligencias Exitosas", page_icon=":round_pushpin:", layout="wide",)
+st.set_page_config(page_title="Tracking de Diligencias", page_icon=":round_pushpin:", layout="wide",)
 
 
 
@@ -111,7 +111,7 @@ def load_marks():
 
 
 # ----  MAINPAGE ----
-st.subheader("🌎 Seguimiento a despachos de notificación - Infonavit Delegación Quintana Roo")
+st.subheader("🌎 Seguimiento de diligencias de notificación en campo")
 st.markdown("""---""")   
 
 # ---- SIDEBAR ----
