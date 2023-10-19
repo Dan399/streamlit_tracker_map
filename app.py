@@ -19,7 +19,7 @@ d_index = 1
 
   
 # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
-st.set_page_config(page_title="Tracking de Diligencias", page_icon=":round_pushpin:", layout="wide",)
+st.set_page_config(page_title="Tracking de Diligencias Exitosas", page_icon=":round_pushpin:", layout="wide",)
 
 
 
@@ -38,9 +38,13 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 def get_data_blue():
     #url = 'https://raw.githubusercontent.com/Dan399/streamlit_tracker_map/Data/DataBluemessaging2023-2023.xlsx'
     url = 'https://raw.githubusercontent.com/Dan399/streamlit_tracker_map/main/Data/DataBluemessaging2023-2023.csv'
+    #data = rq.get(url).content
+    #df = pd.read_excel(BytesIO(data))
+    #df_blue = pd.read_csv(url)
+    #df_blue = pd.read_csv(url, converters={'nrp':str, 'user':str, 'foto_domicilio.lat':float, 'foto_domicilio.lng':float})
     df_blue = pd.read_csv(url, converters={'nrp':str, 'user':str})
-    #df_blue['fecha_accion_fiscal'] = pd.to_datetime(df_blue['fecha_accion_fiscal']).dt.date
-    print(df_blue.head())
+    df_blue['fecha_accion_fiscal'] = pd.to_datetime(df_blue['fecha_accion_fiscal']).dt.date
+    #print(df_blue.head())
     #print(df_blue['fecha_accion_fiscal'].head())
     return df_blue
 
@@ -55,7 +59,7 @@ def get_data_notif():
     # df = pd.read_csv(url,
     #df_notif = pd.read_csv(url2)
     df_notif = pd.read_csv(url2, converters={'usuario_Blue_Naa':str})
-    print(df_notif.head())
+    #print(df_notif.head())
 
     return df_notif
 
@@ -79,11 +83,38 @@ def load_initial_map():
 
 
 def load_marks():
+    #df_selection2 = df_selection[df_selection["nombre_estatus"].isin(multiselect)]
+    #df_selection2["image"] = load_images(df_selection2)
+    #df_selection = df_bluemessaging.query(query_str)
+    #df_selection = df_bluemessaging.query("nrp == @nrp & nombre_estatus == 'Notificado 2a. Visita'")
+    #df_selection = df_bluemessaging[~df_bluemessaging['nombre_estatus'].isin(query_str2)]
+    #df_selection = df_bluemessaging[df_bluemessaging['nrp'] == "@nrp"]
+    #print(df_selection.head(6))
+    #popup = load_images(df_selection2)
+    #print("Load Marks")
     
     for index, location_info in df_selection.iterrows():
        
         if pd.isna(location_info["foto_domicilio.lat"]) == False and pd.isna(location_info["foto_domicilio.lng"]) == False:
-          
+            #location_info["image"] = load_images(location_info["foto_domicilio.src"])
+            #print(str(location_info["image"]))
+            #print(str(df_selection2.at[index,'imagen']))
+            #imagen = Image.open(location_info["image"])
+            #image = folium.IFrame("<img src='" + str(location_info["image"]) + "'>")
+            #image = folium.IFrame(imagen)
+            #imagen = "<img src='" + str(location_info["image"]) + "' width=300>" 
+            # html = '<figure>'
+            # encoded = base64.b64encode(open(str(df_selection2.at[index,'imagen']), 'rb').read()).decode()
+            # html += '<img src="data:image/jpeg;base64,{}">'.format(encoded)
+            # html += '</figure>'
+            # #html = '<img src="data:image/jpeg;base64,{}">'.format
+            # #emncoded = base64.b64encode(open(str(df_selection2.at[index,'imagen']), 'rb').read()).decode()
+            # iframe = folium.IFrame(html, width = 300, height=300)
+            # tooltip = folium.Tooltip(iframe)
+            #icon=folium.IFrame('<i class="fas fa-archway"></i>')
+            #print(str(df_selection2.at[index,'imagen']))
+            #imagen_ = '<img src="' + str(df_selection2.at[index,'imagen']) + '" width=300>'
+            #htmlcode = """<div><img src="C:\Users\IN334906\Lenovo Old\2022\45_PYTHON PROJECTS\Streamlit\1_YTB_Proy1\Streamlit-MapNotificadores\b1inbuginq2a.jpg" alt="Flowers in Chania" width="230" height="172"><br /><span>Flowers in Chania</span></div>"""
             folium.Marker([location_info["foto_domicilio.lat"], location_info["foto_domicilio.lng"]],        
                           #popup = folium.Popup(image),
                           #popup = htmlcode,
@@ -111,7 +142,7 @@ def load_marks():
 
 
 # ----  MAINPAGE ----
-st.subheader("🌎 Seguimiento de diligencias de notificación en campo")
+st.subheader("🌎 Seguimiento a despachos de notificación - Infonavit Delegación Quintana Roo")
 st.markdown("""---""")   
 
 # ---- SIDEBAR ----
@@ -121,7 +152,9 @@ id_notif = df_notificadores['usuario_Blue_Naa'].drop_duplicates()
 notif = st.sidebar.selectbox('Seleccionar notificador 👥', df_notificadores['nombre_Candidato'])
 notifsel = df_notificadores[df_notificadores['nombre_Candidato'] == notif]
 notitext = notifsel['usuario_Blue_Naa'].to_string(index=False)
-fechas = pd.to_datetime(df_bluemessaging['fecha_accion_fiscal'].unique(), infer_datetime_format=True)
+#print(df_bluemessaging['fecha_accion_fiscal'].dtype)
+#fechas = df_bluemessaging['fecha_accion_fiscal'].unique()
+fechas = pd.to_datetime(df_bluemessaging['fecha_accion_fiscal'].unique(), infer_datetime_format=True, format="dd/mm/yyyy")
 
 fec_ini = fechas.min()
 fec_fin = fechas.max()
@@ -144,7 +177,7 @@ if notif:
     
     #df_selection = df_bluemessaging[(df_bluemessaging['user'] == notitext) & (df_bluemessaging['fecha_accion_fiscal'] >= date1)  & (df_bluemessaging['fecha_accion_fiscal'] < date2) ]  
     df_selection = df_bluemessaging[(df_bluemessaging['user'] == notitext)]  
-    print(df_selection.head())
+    #print(df_selection.head())
     df_selection_notif = df_notificadores[df_notificadores['usuario_Blue_Naa'] == notitext]
     num_days = len(df_selection['fecha_accion_fiscal'].unique())
     #print(df_bluemessaging['user'].dtype)
@@ -191,21 +224,16 @@ if notif:
             bargap = 0.1)
         
         left_column, right_column = st.columns([3,2])
-        #left_column.st_folium(CircuitsMap) width=1000, height=600
         with left_column:
-            st_Data = st_folium(CircuitsMap, width=750, height=550)
+            st_Data = st_folium(CircuitsMap, width=800, height=600)
 
         right_column.plotly_chart(fig_notif_diaria, use_container_width=True)
 
         st.markdown("""---""")
-        #df_style = df_selection.style.apply()
-        #st.dataframe(df_selection.style.apply(color_coding(d_index), axis=1))
-        #st.dataframe(df_selection.style.map_index(color_coding))
-        #st.dataframe(df_selection.style.apply(color_coding, axis=1))
         st.dataframe(df_selection)
 else:
     st.sidebar.markdown("""---""")
-    st.sidebar.caption("### :blue[Seleccione un Notificador]")    
+    st.sidebar.caption("### :blue[Seleccione un Notificador]")  
 
 
 
