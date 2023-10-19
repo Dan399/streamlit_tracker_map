@@ -154,7 +154,7 @@ notifsel = df_notificadores[df_notificadores['nombre_Candidato'] == notif]
 notitext = notifsel['usuario_Blue_Naa'].to_string(index=False)
 #print(df_bluemessaging['fecha_accion_fiscal'].dtype)
 #fechas = df_bluemessaging['fecha_accion_fiscal'].unique()
-fechas = pd.to_datetime(df_bluemessaging['fecha_accion_fiscal'].unique(), infer_datetime_format=True, format="dd/mm/yyyy")
+fechas = pd.to_datetime(df_bluemessaging['fecha_accion_fiscal'].unique(), format="dd/mm/yyyy")
 
 fec_ini = fechas.min()
 fec_fin = fechas.max()
