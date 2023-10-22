@@ -142,7 +142,7 @@ def load_marks():
 
 
 # ----  MAINPAGE ----
-st.subheader("🌎 Seguimiento a despachos de notificación - Infonavit Delegación Quintana Roo")
+st.subheader("🌎 Seguimiento de notificadores en campo)
 st.markdown("""---""")   
 
 # ---- SIDEBAR ----
