@@ -83,42 +83,11 @@ def load_initial_map():
 
 
 def load_marks():
-    #df_selection2 = df_selection[df_selection["nombre_estatus"].isin(multiselect)]
-    #df_selection2["image"] = load_images(df_selection2)
-    #df_selection = df_bluemessaging.query(query_str)
-    #df_selection = df_bluemessaging.query("nrp == @nrp & nombre_estatus == 'Notificado 2a. Visita'")
-    #df_selection = df_bluemessaging[~df_bluemessaging['nombre_estatus'].isin(query_str2)]
-    #df_selection = df_bluemessaging[df_bluemessaging['nrp'] == "@nrp"]
-    #print(df_selection.head(6))
-    #popup = load_images(df_selection2)
-    #print("Load Marks")
-    
+   
     for index, location_info in df_selection.iterrows():
        
         if pd.isna(location_info["foto_domicilio.lat"]) == False and pd.isna(location_info["foto_domicilio.lng"]) == False:
-            #location_info["image"] = load_images(location_info["foto_domicilio.src"])
-            #print(str(location_info["image"]))
-            #print(str(df_selection2.at[index,'imagen']))
-            #imagen = Image.open(location_info["image"])
-            #image = folium.IFrame("<img src='" + str(location_info["image"]) + "'>")
-            #image = folium.IFrame(imagen)
-            #imagen = "<img src='" + str(location_info["image"]) + "' width=300>" 
-            # html = '<figure>'
-            # encoded = base64.b64encode(open(str(df_selection2.at[index,'imagen']), 'rb').read()).decode()
-            # html += '<img src="data:image/jpeg;base64,{}">'.format(encoded)
-            # html += '</figure>'
-            # #html = '<img src="data:image/jpeg;base64,{}">'.format
-            # #emncoded = base64.b64encode(open(str(df_selection2.at[index,'imagen']), 'rb').read()).decode()
-            # iframe = folium.IFrame(html, width = 300, height=300)
-            # tooltip = folium.Tooltip(iframe)
-            #icon=folium.IFrame('<i class="fas fa-archway"></i>')
-            #print(str(df_selection2.at[index,'imagen']))
-            #imagen_ = '<img src="' + str(df_selection2.at[index,'imagen']) + '" width=300>'
-            #htmlcode = """<div><img src="C:\Users\IN334906\Lenovo Old\2022\45_PYTHON PROJECTS\Streamlit\1_YTB_Proy1\Streamlit-MapNotificadores\b1inbuginq2a.jpg" alt="Flowers in Chania" width="230" height="172"><br /><span>Flowers in Chania</span></div>"""
             folium.Marker([location_info["foto_domicilio.lat"], location_info["foto_domicilio.lng"]],        
-                          #popup = folium.Popup(image),
-                          #popup = htmlcode,
-                          #tooltip=tooltip).add_to(CircuitsMap)
                           tooltip = 'ID Dataframe: <b>'+ str(index)
                           + '</b><br> Razón Social: <b>'+ str(location_info["razonSocial"]) 
                           + '</b><br> Folio: <b>'+ str(location_info["folio"]) 
@@ -142,7 +111,7 @@ def load_marks():
 
 
 # ----  MAINPAGE ----
-st.subheader("🌎 Seguimiento de notificadores en campo)
+st.subheader("🌎 Seguimiento de notificadores en campo")
 st.markdown("""---""")   
 
 # ---- SIDEBAR ----
